@@ -4,13 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자동차 경고등 색으로 구분하기</title>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <body>
     <div class="container">
+        <!-- 헤더 -->
         <header>
-            <h1>자동차 경고등 색으로 구분하기</h1>
+            <h1>자동차 경고등</h1>
+            <p>자동차 경고등이 뜨셨나요? 아래에서 해당하는<br> 경고등을 찾아 확인해보세요.</p>
         </header>
+
+        <!-- 필터 버튼 -->
+        <section class="filter-section">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-level="all">전체</button>
+                <button class="filter-btn" data-level="level4">빨강</button>
+                <button class="filter-btn" data-level="level3">주황</button>
+                <button class="filter-btn" data-level="level2">초록</button>
+                <button class="filter-btn" data-level="level1">파랑</button>
+            </div>
+        </section>
 
         <!-- 검색 섹션 -->
         <section class="search-section">
@@ -20,12 +37,44 @@
             </div>
         </section>
 
+        <!-- 계기판 영역 -->
+        <section class="dashboard-section">
+            <div class="dashboard-box">
+                <div class="dashboard-item">
+                    <div class="dashboard-img">
+                        <img src="img/level1/02_엔진과열(냉각수)경고등.png" alt="엔진과열(냉각수)경고등">
+                    </div>
+                    <div class="dashboard-text">
+                        <p>엔진과열(냉각수)경고등</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 경고등 설명 섹션 -->
+        <section class="warning-info-section">
+            <button class="warning-info-prev">이전</button>
+            
+            <div class="warning-info-box">
+                <div class="warning-name">4륜구동제어시스템 표시등</div>
+                <div class="warning-cause">
+                    <strong>원인:</strong> SH-AWD 사용시 점등됨. 역동적인 토크 벡터링을 사용하면 타이어 견인력을 최적으로 활용할 수 있음
+                </div>
+                <div class="warning-solution">
+                    <strong>방법:</strong> 기능과 관련없이 점등시 정비센터 등을 방문하여 검사용 진단기 등으로 고장 내용 확인 필요
+                </div>
+            </div>
+
+            <button class="warning-info-next">다음</button>
+
+        </section>
+
         <!-- 색상별 설명 섹션 -->
         <section class="level-info-section">
             <div class="level-card level4">
                 <div class="level-header">
                     <span class="level-color red"></span>
-                    <h2>경고(빨간색)</h2>
+                    <h2>경고</h2>
                 </div>
                 <p>매우 위험한 신호. 비상상황, 긴급조치, 주행 위험 상황을 의미함. 반드시 주행을 멈추고 가까운 정비소에 방문해 차량을 점검해야 하는 상황</p>
             </div>
@@ -33,7 +82,7 @@
             <div class="level-card level3">
                 <div class="level-header">
                     <span class="level-color orange"></span>
-                    <h2>주의(주황색)</h2>
+                    <h2>주의</h2>
                 </div>
                 <p>주의 신호. 운행은 가능하지만 향후 차량에 문제가 생길 수 있으니 주의가 필요한 상황</p>
             </div>
@@ -41,7 +90,7 @@
             <div class="level-card level2">
                 <div class="level-header">
                     <span class="level-color green"></span>
-                    <h2>상태(초록색)</h2>
+                    <h2>상태</h2>
                 </div>
                 <p>방향 지시등이나 헤드 램프 등 자동차 운행과 작동 상태를 나타내는 상황</p>
             </div>
@@ -49,20 +98,9 @@
             <div class="level-card level1">
                 <div class="level-header">
                     <span class="level-color blue"></span>
-                    <h2>상태주의(파란색)</h2>
+                    <h2>상태주의</h2>
                 </div>
                 <p>장치가 작동 중이지만 타인에게 불편을 줄 수 있으니 주의가 필요한 상황</p>
-            </div>
-        </section>
-
-        <!-- 필터 버튼 -->
-        <section class="filter-section">
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-level="all">전체</button>
-                <button class="filter-btn" data-level="level4">경고(빨간색)</button>
-                <button class="filter-btn" data-level="level3">주의(주황색)</button>
-                <button class="filter-btn" data-level="level2">상태(초록색)</button>
-                <button class="filter-btn" data-level="level1">상태주의(파란색)</button>
             </div>
         </section>
 
@@ -76,6 +114,46 @@
             </div>
         </section>
     </div>
+
+    <div class="popup-layer on">
+        <div class="popup-content">
+            <section class="level-info-section">
+                <div class="level-card level4">
+                    <div class="level-header">
+                        <span class="level-color red"></span>
+                        <h2>경고</h2>
+                    </div>
+                    <p>매우 위험한 신호. 비상상황, 긴급조치, 주행 위험 상황을 의미함. 반드시 주행을 멈추고 가까운 정비소에 방문해 차량을 점검해야 하는 상황</p>
+                </div>
+    
+                <div class="level-card level3">
+                    <div class="level-header">
+                        <span class="level-color orange"></span>
+                        <h2>주의</h2>
+                    </div>
+                    <p>주의 신호. 운행은 가능하지만 향후 차량에 문제가 생길 수 있으니 주의가 필요한 상황</p>
+                </div>
+    
+                <div class="level-card level2">
+                    <div class="level-header">
+                        <span class="level-color green"></span>
+                        <h2>상태</h2>
+                    </div>
+                    <p>방향 지시등이나 헤드 램프 등 자동차 운행과 작동 상태를 나타내는 상황</p>
+                </div>
+    
+                <div class="level-card level1">
+                    <div class="level-header">
+                        <span class="level-color blue"></span>
+                        <h2>상태주의</h2>
+                    </div>
+                    <p>장치가 작동 중이지만 타인에게 불편을 줄 수 있으니 주의가 필요한 상황</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="dimLayer"></div>
 
     <script src="script.js"></script>
 </body>

@@ -24,17 +24,30 @@ function displayWarnings() {
 
     let filteredWarnings = [];
 
+    // 레벨 순서 정의 (4, 3, 2, 1 순서)
+    const levelOrder = ['level4', 'level3', 'level2', 'level1'];
+    
+    // 전체보기일 때는 레벨 순서대로, 필터링일 때는 해당 레벨만
+    const levelsToProcess = currentFilter === 'all' 
+        ? levelOrder 
+        : [currentFilter];
+
     // 레벨별로 경고등 수집
-    for (const level in allWarnings) {
-        if (currentFilter === 'all' || currentFilter === level) {
-            allWarnings[level].forEach(warning => {
+    levelsToProcess.forEach(level => {
+        if (allWarnings[level]) {
+            // 각 레벨의 경고등을 가나다 순으로 정렬
+            const sortedWarnings = [...allWarnings[level]].sort((a, b) => {
+                return a.name.localeCompare(b.name, 'ko');
+            });
+
+            sortedWarnings.forEach(warning => {
                 // 검색어 필터링
                 if (currentSearch === '' || warning.name.includes(currentSearch)) {
                     filteredWarnings.push({ ...warning, level: level });
                 }
             });
         }
-    }
+    });
 
     if (filteredWarnings.length === 0) {
         noResults.style.display = 'block';
