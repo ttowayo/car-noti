@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자동차 경고등 색으로 구분하기</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/js/script.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -39,10 +41,17 @@
 
         <!-- 계기판 영역 -->
         <section class="dashboard-section">
+            <button class="btn-level" onclick="togglePopup('#popup-level')">
+                <img src="/img/ico-info.png" alt="">
+            </button>
             <div class="dashboard-box">
+                <div class="dashboard-turn">
+                    <div class="ico-prev"></div>
+                    <div class="ico-next"></div>
+                </div>
                 <div class="dashboard-item">
                     <div class="dashboard-img">
-                        <img src="img/level1/02_엔진과열(냉각수)경고등.png" alt="엔진과열(냉각수)경고등">
+                        <img src="img/level4/066_4륜구동제어시스템_표시등.png" alt="4륜구동제어시스템_표시등">
                     </div>
                     <div class="dashboard-text">
                         <p>엔진과열(냉각수)경고등</p>
@@ -53,55 +62,21 @@
 
         <!-- 경고등 설명 섹션 -->
         <section class="warning-info-section">
-            <button class="warning-info-prev">이전</button>
+            <button class="btn-info prev">이전</button>
             
             <div class="warning-info-box">
                 <div class="warning-name">4륜구동제어시스템 표시등</div>
                 <div class="warning-cause">
-                    <strong>원인:</strong> SH-AWD 사용시 점등됨. 역동적인 토크 벡터링을 사용하면 타이어 견인력을 최적으로 활용할 수 있음
+                    <strong>원인 :</strong> SH-AWD 사용시 점등됨. 역동적인 토크 벡터링을 통해 타이어 접지력을 최적으로 활용할 수 있음
                 </div>
                 <div class="warning-solution">
-                    <strong>방법:</strong> 기능과 관련없이 점등시 정비센터 등을 방문하여 검사용 진단기 등으로 고장 내용 확인 필요
+                    <strong>조치 :</strong> 기능과 관련 없이 점등 시 정비센터 방문 및 진단기로 고장 내용 확인 필요
                 </div>
+                <div class="warning-page-num">1/10</div>
             </div>
 
-            <button class="warning-info-next">다음</button>
+            <button class="btn-info next">다음</button>
 
-        </section>
-
-        <!-- 색상별 설명 섹션 -->
-        <section class="level-info-section">
-            <div class="level-card level4">
-                <div class="level-header">
-                    <span class="level-color red"></span>
-                    <h2>경고</h2>
-                </div>
-                <p>매우 위험한 신호. 비상상황, 긴급조치, 주행 위험 상황을 의미함. 반드시 주행을 멈추고 가까운 정비소에 방문해 차량을 점검해야 하는 상황</p>
-            </div>
-
-            <div class="level-card level3">
-                <div class="level-header">
-                    <span class="level-color orange"></span>
-                    <h2>주의</h2>
-                </div>
-                <p>주의 신호. 운행은 가능하지만 향후 차량에 문제가 생길 수 있으니 주의가 필요한 상황</p>
-            </div>
-
-            <div class="level-card level2">
-                <div class="level-header">
-                    <span class="level-color green"></span>
-                    <h2>상태</h2>
-                </div>
-                <p>방향 지시등이나 헤드 램프 등 자동차 운행과 작동 상태를 나타내는 상황</p>
-            </div>
-
-            <div class="level-card level1">
-                <div class="level-header">
-                    <span class="level-color blue"></span>
-                    <h2>상태주의</h2>
-                </div>
-                <p>장치가 작동 중이지만 타인에게 불편을 줄 수 있으니 주의가 필요한 상황</p>
-            </div>
         </section>
 
         <!-- 경고등 목록 -->
@@ -115,7 +90,9 @@
         </section>
     </div>
 
-    <div class="popup-layer on">
+    <!-- 레벨 정보 팝업 -->
+    <div class="popup-layer" id="popup-level">
+        <div class="btn-close" onclick="togglePopup('#popup-level')"></div>
         <div class="popup-content">
             <section class="level-info-section">
                 <div class="level-card level4">
@@ -153,9 +130,13 @@
         </div>
     </div>
 
-    <div id="dimLayer"></div>
-
-    <script src="script.js"></script>
+    <!-- 위로 가기 버튼 -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="위로 가기">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 38V10M24 10L10 24M24 10L38 24" stroke="#666666" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+   
 </body>
 </html>
 
