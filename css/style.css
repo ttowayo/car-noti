@@ -128,7 +128,7 @@ header p {
     height: 300px;
     border-radius: 3px;
     background-image: url('/img/bg-dashboard.png');
-    background-size: cover;
+    background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -178,7 +178,7 @@ header p {
 
 .warning-info-section .warning-info-box{
     width: 370px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .warning-info-section  .warning-name {
@@ -642,30 +642,6 @@ header p {
     font-size: 16px;
 }
 
-/* ============================================================================ */
-/* ========================= max-width: 420px ================================= */
-/* ============================================================================ */
-
-/* 반응형 디자인 */
-@media (max-width: 420px) {
-    .container {
-        padding: 15px;
-    }
-
-    header h1 {
-        font-size: 20px;
-    }
-
-    .filter-btn {
-        font-size: 11px;
-        padding: 8px 12px;
-    }
-
-    .warning-card {
-        padding: 12px;
-    }
-}
-
 /* 위로 가기 버튼 */
 .scroll-to-top {
     position: fixed;
@@ -706,6 +682,379 @@ header p {
     stroke: #888888;
 }
 
+
+/* ============================================================================ */
+/* ========================= max-width: 720px ================================= */
+/* ============================================================================ */
+@media (max-width: 720px) {
+/* 기본 스타일 */
+
+body {}
+
+.container {
+    max-width: 100.00vw;
+margin: 4.17vw auto;
+padding: 2.78vw;
+border: 0.42vw solid #1E1C1D;
+border-radius: 1.39vw;
+}
+
+/* 헤더 */
+header {padding: 4.17vw 0 5.56vw;
+}
+
+header h1 {font-size: 7.94vw;}
+
+header p {font-size: 3.78vw;margin-top: 4.17vw;}
+
+/* 공통 */
+
+.popup-layer .btn-close {top: -7.64vw;
+width: 6.94vw;
+height: 6.94vw;
+}
+
+
+
+.popup-layer .btn-close::before {font-size: 5.56vw;
+border: 0.42vw solid #666666;
+border-radius: 100%;
+width: 6.94vw;
+height: 6.39vw;
+}
+
+.popup-layer .btn-close:hover::before {
+    font-size: 6.67vw;
+}
+
+.popup-layer {top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) translateZ(0);
+border-radius: 0.69vw;
+width: 88.89vw;
+}
+
+.popup-layer.on {}
+
+.popup-content{padding: 2.78vw;
+}
+
+#dimLayer {} 
+.layer-popup {left:50%;
+top:50%;
+width:88.89vw;
+margin-left:-44.44vw;
+border:0.14vw solid #ddd;
+transform: translate(-50%, -50%) translateZ(0);
+transform: translate3d(-50%, -50%, 0);
+} 
+.layer-popup.on {} 
+
+/* 계기판 영역 */
+.dashboard-section{}
+.dashboard-section .btn-level {right: 1.39vw;
+top: 1.39vw;
+width: 4.17vw;
+height: 4.17vw;
+}
+
+
+.dashboard-box {width: 100%;
+height: 41.67vw;
+border-radius: 0.42vw;
+background-size: 100% auto;
+}
+
+/* 설명 섹션 */
+.warning-info-section {padding: 4.17vw 2.78vw;
+}
+.warning-info-section .btn-info {
+    width: 16.67vw;
+height: 11.11vw;
+}
+.warning-info-section .btn-info.prev {}
+
+.warning-info-section .btn-info.prev.on {top: 1.39vw;
+}
+
+.warning-info-section .btn-info.next {}
+.warning-info-section .btn-info.next.on {top: 1.39vw;
+}
+
+.warning-info-section .warning-info-box{
+    width: 51.39vw;
+}
+
+.warning-info-section  .warning-name {font-size: 3.50vw;margin-bottom: 2.78vw;}
+
+.warning-info-section  .warning-cause,
+.warning-info-section  .warning-solution {font-size: 3.52vw;margin-bottom: 2.39vw;}
+
+.warning-info-section  .warning-page-num {font-size: 3.34vw;margin: 4.17vw auto 0;}
+
+.warning-info-section  .warning-cause strong,
+.warning-info-section  .warning-solution strong {}
+
+.dashboard-box .dashboard-turn {top: 6.81vw;
+width: 28.19vw;
+height: 3.61vw;
+}
+
+.dashboard-box .dashboard-turn .ico-prev {
+    width: 3.61vw;
+height: 3.61vw;
+}
+
+.dashboard-box .dashboard-turn .ico-prev::before {left: -1.25vw;
+top: 0.00vw;
+width: 3.06vw;
+height: 3.06vw;
+border-left: 1.67vw solid #098057;
+border-top: 1.67vw solid transparent;
+border-bottom: 1.67vw solid transparent;
+border-radius: 0.00vw 0 0 0.00vw;
+}
+
+.dashboard-box .dashboard-turn .ico-prev::after {left: 0.83vw;
+top: 1.00vw;
+width: 2.92vw;
+height: 1.25vw;
+border-radius: 0.28vw;
+}
+
+.dashboard-box .dashboard-turn .ico-prev.on::before {
+    border-left: 1.67vw solid #11f3a3;
+left: -1.67vw;
+}
+
+.dashboard-box .dashboard-turn .ico-prev.on::after {top: 1.01vw;
+}
+
+.dashboard-box .dashboard-turn .ico-next {
+    width: 3.61vw;
+height: 3.61vw;
+}
+
+.dashboard-box .dashboard-turn .ico-next::before {right: -1.39vw;
+top: 0.00vw;
+width: 3.06vw;
+height: 3.06vw;
+border-left: 1.67vw solid #098057;
+border-top: 1.67vw solid transparent;
+border-bottom: 1.67vw solid transparent;
+border-radius: 0.00vw 0 0 0.00vw;
+}
+
+
+
+.dashboard-box .dashboard-turn .ico-next::after {left: 0.00vw;
+top: 1.00vw;
+width: 2.92vw;
+height: 1.25vw;
+border-radius: 0.28vw;
+}
+
+.dashboard-box .dashboard-turn .ico-next.on::before {
+    border-left: 1.67vw solid #11f3a3;
+right: -1.67vw;
+}
+
+.dashboard-box .dashboard-turn .ico-next.on::after{top: 1.01vw;
+}
+
+.dashboard-box .dashboard-item {top: 8.33vw;
+width: 16.39vw;
+height: 18.89vw;
+border: 0.42vw solid #050506;
+border-radius: 0.69vw;
+}
+
+.dashboard-box .dashboard-img {width: 90%;
+margin: 1.39vw auto 0;
+}
+
+.dashboard-box .dashboard-img img {
+    width: 100%;
+}
+
+/* 검색 섹션 */
+.search-section {
+    margin-bottom: 3.47vw;
+}
+
+.search-box {gap: 1.39vw;
+}
+
+#searchInput {padding: 1.67vw;border: 0.42vw solid #1E1C1D;border-radius: 0.69vw;font-size: 3.22vw;}
+
+#searchInput::placeholder {}
+
+#searchBtn {
+    padding: 1.67vw 2.78vw;
+    border: 0.42vw solid #1E1C1D;
+    border-radius: 0.69vw;
+    font-size: 2.94vw;
+}
+
+#searchBtn:hover {}
+
+/* 레벨 정보 섹션 */
+.level-info-section {
+    /* margin-bottom: 4.17vw;*/
+gap: 2.08vw;
+/* padding: 4.17vw; */
+}
+
+.level-card {border-radius: 0.69vw;
+border: 0.42vw solid;
+padding: 2.08vw;
+min-height: 27.78vw;
+}
+
+.level-card.level4 {}
+
+.level-card.level3 {}
+
+.level-card.level2 {}
+
+.level-card.level1 {}
+
+.level-header {gap: 3.39vw;margin-bottom: 1.39vw;}
+
+.level-color {
+    width: 3.47vw;
+height: 3.47vw;
+border-radius: 50%;
+}
+
+.level-color.red {}
+
+.level-color.orange {}
+
+.level-color.green {/* border: 0.42vw solid #0f0e17;*/
+}
+
+.level-color.blue {}
+
+.level-card h2 {font-size: 3.78vw;}
+
+.level-card p {font-size: 3.22vw;}
+
+/* 필터 섹션 */
+.filter-section {
+    margin-bottom: 3.47vw;
+}
+
+.filter-buttons {gap: 1.11vw;
+}
+
+.filter-btn {
+    padding: 1.39vw 2.78vw;
+    border: 0.42vw solid #717171;
+    border-radius: 0.42vw;
+    font-size: 3.22vw;
+}
+
+.filter-buttons .filter-btn.active {}
+
+.filter-btn:hover {}
+
+.filter-buttons .filter-btn:nth-child(2) {}
+
+.filter-buttons .filter-btn:nth-child(2).active {}
+.filter-buttons .filter-btn:nth-child(2):hover {}
+
+.filter-buttons .filter-btn:nth-child(3) {}
+
+.filter-buttons .filter-btn:nth-child(3).active {}
+
+.filter-buttons .filter-btn:nth-child(3):hover {}
+
+.filter-buttons .filter-btn:nth-child(4) {}
+
+.filter-buttons .filter-btn:nth-child(4).active {}
+
+.filter-buttons .filter-btn:nth-child(4):hover {}
+
+.filter-buttons .filter-btn:nth-child(5) {}
+
+.filter-buttons .filter-btn:nth-child(5).active {}
+
+.filter-buttons .filter-btn:nth-child(5):hover {}
+
+/* 경고등 목록 */
+.warnings-section {
+    margin: 4.17vw 0;
+/* padding: 4.17vw;*/
+}
+
+.warnings-grid {gap: 2.08vw;
+}
+
+.warning-card {border-radius: 0.69vw;
+padding: 2.08vw;
+border: 0.42vw solid;
+}
+
+.warning-card:hover {
+    transform: translateY(-0.28vw);
+box-shadow: 0 0.56vw 1.11vw rgba(0, 0, 0, 0.3);
+}
+
+.warning-card:hover .warning-name{}
+
+.warning-card.level4 {}
+
+.warning-card.level3 {}
+
+.warning-card.level2 {}
+
+.warning-card.level1 {}
+
+.warning-image {
+    width: 100%;
+max-width: 13.89vw;
+margin: 0 auto 0.69vw;
+padding: 1.39vw;
+}
+
+.level1 .warning-image {}
+.level2 .warning-image {}
+.level3 .warning-image {}
+.level4 .warning-image {}
+
+.warnings-section .warning-name {font-size: 3.22vw;/* margin-bottom: 1.39vw;*/}
+
+.no-results {padding: 5.56vw 2.78vw;
+font-size: 2.22vw;
+}
+
+/* 위로 가기 버튼 */
+.scroll-to-top {right: 2.78vw;bottom: 2.78vw;width: 10.33vw;height: 10.33vw;border: 0.42vw solid #666666;border-radius: 50%;}
+
+.scroll-to-top.show {}
+
+.scroll-to-top:hover {transform: translateY(-0.42vw);
+}
+
+.scroll-to-top svg {
+    width: 4.33vw;
+    height: 4.33vw;
+}
+
+.scroll-to-top:hover svg path {}
+    
+
+}
+
 /* ============================================================================ */
 /* ========================= max-width: 420px ================================= */
 /* ============================================================================ */
+@media (max-width: 420px) {
+    .warnings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+      }
+}
+

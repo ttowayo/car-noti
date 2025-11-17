@@ -4,6 +4,14 @@ let currentFilter = 'all';
 let currentSearch = '';
 let currentWarningIndex = 0; // 현재 표시 중인 경고등 인덱스
 let currentWarningList = []; // 현재 필터링된 경고등 목록
+const VALID_LEVELS = ['level4', 'level3', 'level2', 'level1'];
+let enableUrlSync = false;
+let suppressHashChange = false;
+const initialRoute = extractRouteFromHash(window.location.hash);
+let initialRouteApplied = false;
+if (initialRoute?.level && VALID_LEVELS.includes(initialRoute.level)) {
+    currentFilter = initialRoute.level;
+}
 // 레이어 팝업
 const dimLayer = "<div id='dimLayer'></div>";
 
@@ -27,24 +35,18 @@ function displayWarnings() {
     warningsList.innerHTML = '';
 
     let filteredWarnings = [];
-
-    // 레벨 순서 정의 (4, 3, 2, 1 순서)
-    const levelOrder = ['level4', 'level3', 'level2', 'level1'];
     
     // 전체보기일 때는 레벨 순서대로, 필터링일 때는 해당 레벨만
     const levelsToProcess = currentFilter === 'all' 
-        ? levelOrder 
+        ? VALID_LEVELS 
         : [currentFilter];
 
     // 레벨별로 경고등 수집
     levelsToProcess.forEach(level => {
         if (allWarnings[level]) {
-            // 각 레벨의 경고등을 가나다 순으로 정렬
-            const sortedWarnings = [...allWarnings[level]].sort((a, b) => {
-                return a.name.localeCompare(b.name, 'ko');
-            });
+            const warnings = allWarnings[level];
 
-            sortedWarnings.forEach(warning => {
+            warnings.forEach(warning => {
                 // 검색어 필터링
                 if (currentSearch === '' || warning.name.includes(currentSearch)) {
                     filteredWarnings.push({ ...warning, level: level });
@@ -70,6 +72,8 @@ function displayWarnings() {
         const card = createWarningCard(warning);
         warningsList.appendChild(card);
     });
+
+    updateFilterButtonState();
 
     // 필터링된 첫 번째 경고등을 계기판에 표시
     currentWarningIndex = 0;
@@ -109,7 +113,7 @@ function createWarningCard(warning) {
 }
 
 // 계기판 및 설명 섹션 업데이트
-function updateDashboard(warning) {
+function updateDashboard(warning, suppressUrlUpdate = false) {
     if (!warning) {
         // 경고등이 없을 때 초기화 (검색 결과 없음)
         $(".dashboard-box .dashboard-img img").attr('src', 'img/ico-empty.png');
@@ -118,6 +122,9 @@ function updateDashboard(warning) {
         $(".warning-info-section .warning-cause").html('<strong>원인 :</strong>');
         $(".warning-info-section .warning-solution").html('<strong>조치 :</strong>');
         $(".warning-info-section .warning-page-num").text('0/0');
+        if (enableUrlSync && !suppressUrlUpdate) {
+            updateUrl(null, null);
+        }
         return;
     }
 
@@ -138,6 +145,10 @@ function updateDashboard(warning) {
     const currentPage = currentWarningIndex + 1;
     const totalPages = currentWarningList.length;
     $(".warning-info-section .warning-page-num").text(`${currentPage}/${totalPages}`);
+    
+    if (enableUrlSync && !suppressUrlUpdate) {
+        updateUrl(warning.level, warning.id);
+    }
 }
 
 // 필터 버튼 이벤트
@@ -244,11 +255,17 @@ function setupScrollToTop() {
 
 // 초기화
 document.addEventListener('DOMContentLoaded', () => {
-    loadWarnings();
+    (async () => {
+        await loadWarnings();
+        applyInitialRoute();
+        enableUrlSync = true;
+        syncUrlWithCurrentWarning();
+    })();
     setupFilterButtons();
     setupSearch();
     setupNavigationButtons();
     setupScrollToTop();
+    window.addEventListener('hashchange', handleHashChange);
 });
   
 // 레이어 팝업 열고 닫기
@@ -286,4 +303,102 @@ $(function (){
         $("body").css("overflow", "auto");
     });
 });
+
+function updateFilterButtonState() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    if (!filterButtons.length) return;
+    filterButtons.forEach(btn => {
+        const level = btn.getAttribute('data-level');
+        if (level === currentFilter) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+function extractRouteFromHash(hash) {
+    if (!hash) return null;
+    const normalizedHash = hash.replace(/^#/, '');
+    const match = normalizedHash.match(/^(level[1-4])\/(\d+)$/);
+    if (!match) return null;
+    return {
+        level: match[1],
+        id: parseInt(match[2], 10)
+    };
+}
+
+function updateUrl(level, id) {
+    const targetHash = level && id ? `#${level}/${id}` : '';
+    if (window.location.hash === targetHash) return;
+    if (targetHash) {
+        suppressHashChange = true;
+        window.location.hash = targetHash;
+    } else {
+        if (window.location.hash) {
+            suppressHashChange = true;
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            suppressHashChange = false;
+        }
+    }
+}
+
+function selectWarningById(level, id) {
+    if (!level || !id) return false;
+    const index = currentWarningList.findIndex(w => 
+        w.level === level && Number(w.id) === Number(id)
+    );
+    if (index === -1) {
+        return false;
+    }
+    currentWarningIndex = index;
+    updateDashboard(currentWarningList[index], true);
+    return true;
+}
+
+function applyInitialRoute() {
+    if (initialRouteApplied) return;
+    initialRouteApplied = true;
+    if (!initialRoute || !initialRoute.level) return;
+    const applied = selectWarningById(initialRoute.level, initialRoute.id);
+    if (!applied && currentWarningList.length > 0) {
+        currentWarningIndex = 0;
+        updateDashboard(currentWarningList[0], true);
+    }
+}
+
+function syncUrlWithCurrentWarning() {
+    if (!currentWarningList.length || !currentWarningList[currentWarningIndex]) {
+        updateUrl(null, null);
+        return;
+    }
+    const warning = currentWarningList[currentWarningIndex];
+    updateUrl(warning.level, warning.id);
+}
+
+function handleHashChange() {
+    if (!enableUrlSync) return;
+    if (suppressHashChange) {
+        suppressHashChange = false;
+        return;
+    }
+    const route = extractRouteFromHash(window.location.hash);
+    if (!route || !route.level) {
+        currentFilter = 'all';
+        displayWarnings();
+        return;
+    }
+
+    if (route.level !== currentFilter) {
+        currentFilter = route.level;
+        displayWarnings();
+        return;
+    }
+
+    const selected = selectWarningById(route.level, route.id);
+    if (!selected && currentWarningList.length) {
+        currentWarningIndex = 0;
+        updateDashboard(currentWarningList[0], true);
+    }
+}
 
