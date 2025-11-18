@@ -4,14 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자동차 경고등 색으로 구분하기</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="description" content="자동차 계기판 경고등의 색상에 따라 어떤 문제가 발생했는지 쉽게 확인하세요.">
+    <meta name="keywords" content="자동차 경고등, 경고등 색상, 차량 경고등 의미, 자동차 계기판 경고등, 자동차 빨간 경고등, 자동차 주황 경고등, 자동차 노란 경고등, 자동차 경고등 설명">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="자동차 경고등 색상별 의미 정리 완벽 가이드">
+    <meta property="og:description" content="자동차 계기판 경고등의 색상별 위험도와 조치 방법을 한 페이지에서 빠르게 확인하세요. 초보운전자도 쉽게 이해할 수 있는 가이드입니다.">
+    <meta property="og:url" content="img/og-image.png"> <!-- 페이지 URL 변경 -->
+    <meta property="og:image" content="img/og-image.png"> <!-- OG 이미지 경로 변경 -->
+    <meta property="og:site_name" content="YourSiteName">
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32"  href="favicons/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon-76x76.png">
+    <link rel="icon" type="image/png" sizes="96x96"  href="favicons/apple-touch-icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="favicons/android-icon-192x192.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/script.js"></script>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 </head>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="/js/script.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <body>
     <div class="container">
         <!-- 헤더 -->
@@ -78,6 +103,11 @@
 
         <!-- 경고등 목록 -->
         <section class="warnings-section">
+            <div class="list-view-change">
+                <button class="btn-grid4-view">가로4칸</button>
+                <button class="btn-grid3-view">가로3칸</button>
+                <button class="btn-grid2-view">가로2칸</button>
+            </div>
             <div id="warningsList" class="warnings-grid">
                 <!-- 경고등 카드들이 여기에 동적으로 생성됩니다 -->
             </div>

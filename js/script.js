@@ -253,6 +253,36 @@ function setupScrollToTop() {
     });
 }
 
+// 그리드 보기 버튼 기능
+function setupGridViewButtons() {
+    const gridViewButtons = document.querySelectorAll('.btn-grid4-view, .btn-grid3-view, .btn-grid2-view');
+    const warningsGrid = document.querySelector('.warnings-grid');
+    
+    if (!warningsGrid) return;
+    
+    // 기본값: 4칸
+    warningsGrid.style.gridTemplateColumns = '1fr 1fr 1fr 1fr';
+    document.querySelector('.btn-grid4-view')?.classList.add('active');
+    
+    gridViewButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 모든 버튼에서 active 클래스 제거
+            gridViewButtons.forEach(b => b.classList.remove('active'));
+            // 클릭한 버튼에 active 클래스 추가
+            btn.classList.add('active');
+            
+            // 그리드 열 수 변경
+            if (btn.classList.contains('btn-grid4-view')) {
+                warningsGrid.style.gridTemplateColumns = '1fr 1fr 1fr 1fr';
+            } else if (btn.classList.contains('btn-grid3-view')) {
+                warningsGrid.style.gridTemplateColumns = '1fr 1fr 1fr';
+            } else if (btn.classList.contains('btn-grid2-view')) {
+                warningsGrid.style.gridTemplateColumns = '1fr 1fr';
+            }
+        });
+    });
+}
+
 // 초기화
 document.addEventListener('DOMContentLoaded', () => {
     (async () => {
@@ -265,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSearch();
     setupNavigationButtons();
     setupScrollToTop();
+    setupGridViewButtons();
     window.addEventListener('hashchange', handleHashChange);
 });
   
